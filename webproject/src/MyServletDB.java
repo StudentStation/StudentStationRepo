@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/MyServletDB")
 public class MyServletDB extends HttpServlet {
    private static final long serialVersionUID = 1L;
-   static String url = "jdbc:mysql://ec2-13-59-114-64.us-east-2.compute.amazonaws.com:3306/studentstation";
+   static String url = "jdbc:mysql://ec2-13-59-114-64.us-east-2.compute.amazonaws.com:3306/studentStation";
    static String user = "newmysqlremoteuser";
    static String password = "mypassword";
    static Connection connection = null;
@@ -57,13 +57,23 @@ public class MyServletDB extends HttpServlet {
          ResultSet rs = preparedStatement.executeQuery();
          while (rs.next()) {
             String id = rs.getString("ID");
-            String username = rs.getString("MYUSER");
+            String name = rs.getString("NAME");
             String email = rs.getString("EMAIL");
-            String phone = rs.getString("PHONE");
+            String major = rs.getString("MAJOR");
+            String minor = rs.getString("MINOR");
+            String org = rs.getString("ORGANIZATION");
+            String grad = rs.getString("GRADUATION");
+            String bio = rs.getString("BIO");
+
+
             response.getWriter().append("USER ID: " + id + ", ");
-            response.getWriter().append("USER NAME: " + username + ", ");
-            response.getWriter().append("USER EMAIL: " + email + ", ");
-            response.getWriter().append("USER PHONE: " + phone + "<br>");
+            response.getWriter().append("NAME: " + name + ", ");
+            response.getWriter().append("EMAIL: " + email + ", ");
+            response.getWriter().append("MAJOR: " + major + ", ");
+            response.getWriter().append("MINOR: " + minor + ", ");
+            response.getWriter().append("ORGANIZATION: " + org + ", ");
+            response.getWriter().append("GRADUATION: " + grad + ", ");
+            response.getWriter().append("BIO: " + bio + "<br>");
          }
       } catch (SQLException e) {
          e.printStackTrace();

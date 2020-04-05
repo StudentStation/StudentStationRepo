@@ -22,20 +22,29 @@ public class SimpleFormInsert extends HttpServlet {
    }
 
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      String userName = request.getParameter("userName");
+      String name = request.getParameter("name");
       String email = request.getParameter("email");
-      String phone = request.getParameter("phone");
+      String major = request.getParameter("major");
+      String minor = request.getParameter("minor");
+      String org = request.getParameter("organization");
+      String grad = request.getParameter("graduation");
+      String bio = request.getParameter("bio");
+
 
       Connection connection = null;
-      String insertSql = " INSERT INTO studentInfo (id, MYUSER, EMAIL, PHONE) values (default, ?, ?, ?)";
+      String insertSql = " INSERT INTO studentInfo (id, NAME, EMAIL, MAJOR, MINOR, ORGANIZATIONS, GRADUATION, BIO) values (default, ?, ?, ?, ?, ?, ?, ?)";
 
       try {
          DBConnection.getDBConnection();
          connection = DBConnection.connection;
          PreparedStatement preparedStmt = connection.prepareStatement(insertSql);
-         preparedStmt.setString(1, userName);
+         preparedStmt.setString(1, name);
          preparedStmt.setString(2, email);
-         preparedStmt.setString(3, phone);
+         preparedStmt.setString(3, major);
+         preparedStmt.setString(4, minor);
+         preparedStmt.setString(5, org);
+         preparedStmt.setString(6, grad);
+         preparedStmt.setString(7, bio);
          preparedStmt.execute();
          connection.close();
       } catch (Exception e) {
@@ -54,9 +63,13 @@ public class SimpleFormInsert extends HttpServlet {
             "<h2 align=\"center\">" + title + "</h2>\n" + //
             "<ul>\n" + //
 
-            "  <li><b>User Name</b>: " + userName + "\n" + //
+            "  <li><b>Name</b>: " + name + "\n" + //
             "  <li><b>Email</b>: " + email + "\n" + //
-            "  <li><b>Phone</b>: " + phone + "\n" + //
+            "  <li><b>Major</b>: " + major + "\n" + //
+            "  <li><b>Minor</b>: " + minor + "\n" + //
+            "  <li><b>Organization</b>: " + org + "\n" + //
+            "  <li><b>Graduation</b>: " + grad + "\n" + //
+            "  <li><b>Bio</b>: " + bio + "\n" + //
 
             "</ul>\n");
 

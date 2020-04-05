@@ -40,33 +40,47 @@ public class SimpleFormSearch extends HttpServlet {
       PreparedStatement preparedStatement = null;
       try {
          DBConnection.getDBConnection(getServletContext());
+//         DBConnectionLynch.getDBConnection();
          connection = DBConnection.connection;
 
-         if (keyword.isEmpty()) {
-            String selectSQL = "SELECT * FROM myTable";
+         if (keyword == null || keyword.isEmpty()) {
+            String selectSQL = "SELECT * FROM studentInfo";
             preparedStatement = connection.prepareStatement(selectSQL);
          } else {
-            String selectSQL = "SELECT * FROM myTable WHERE MYUSER LIKE ?";
-            String theUserName = keyword + "%";
+            String selectSQL = "SELECT * FROM studentInfo WHERE NAME LIKE ? OR EMAIL LIKE ? OR MAJOR LIKE ? OR MINOR LIKE ? OR ORGANIZATION LIKE ? OR GRADUATION LIKE ?";
+            String search = keyword + "%";
             preparedStatement = connection.prepareStatement(selectSQL);
-            preparedStatement.setString(1, theUserName);
+            preparedStatement.setString(1, search);
+            preparedStatement.setString(2, search);
+            preparedStatement.setString(3, search);
+            preparedStatement.setString(4, search);
+            preparedStatement.setString(5, search);
+            preparedStatement.setString(6, search);
+
+            
          }
          ResultSet rs = preparedStatement.executeQuery();
 
          while (rs.next()) {
-            int id = rs.getInt("id");
-            String userName = rs.getString("myuser").trim();
+            String name = rs.getString("name").trim();
             String email = rs.getString("email").trim();
-            String phone = rs.getString("phone").trim();
+            String major = rs.getString("major").trim();
+            String minor = rs.getString("minor").trim();
+            String org = rs.getString("organization").trim();
+            String grad = rs.getString("graduation").trim();
 
-            if (keyword.isEmpty() || userName.contains(keyword)) {
-               out.println("ID: " + id + ", ");
-               out.println("User: " + userName + ", ");
+
+
+            if (keyword == null || keyword.isEmpty() || name.contains(keyword) || email.contains(keyword) || major.contains(keyword) || minor.contains(keyword) || org.contains(keyword) || grad.contains(keyword)) {
+               out.println("Name: " + name + ", ");
                out.println("Email: " + email + ", ");
-               out.println("Phone: " + phone + "<br>");
+               out.println("Major: " + major + ", ");
+               out.println("Minor: " + minor + ", ");
+               out.println("Organizations: " + org + ", ");
+               out.println("Graduation Date: " + grad + "<br>");
             }
          }
-         out.println("<a href=/webproject/simpleFormSearch.html>Search Data</a> <br>");
+         out.println("<a href=/webproject/searchLynch.html>Search Data</a> <br>");
          out.println("</body></html>");
          rs.close();
          preparedStatement.close();
