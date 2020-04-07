@@ -47,7 +47,7 @@ public class SimpleFormSearch extends HttpServlet {
             String selectSQL = "SELECT * FROM studentInfo";
             preparedStatement = connection.prepareStatement(selectSQL);
          } else {
-            String selectSQL = "SELECT * FROM studentInfo WHERE NAME LIKE ? OR EMAIL LIKE ? OR MAJOR LIKE ? OR MINOR LIKE ? OR ORGANIZATION LIKE ? OR GRADUATION LIKE ?";
+            String selectSQL = "SELECT * FROM studentInfo WHERE NAME LIKE ? OR EMAIL LIKE ? OR MAJOR LIKE ? OR MINOR LIKE ? OR ORGANIZATIONS LIKE ? OR GRADUATION LIKE ?";
             String search = keyword + "%";
             preparedStatement = connection.prepareStatement(selectSQL);
             preparedStatement.setString(1, search);
@@ -66,7 +66,7 @@ public class SimpleFormSearch extends HttpServlet {
             String email = rs.getString("email").trim();
             String major = rs.getString("major").trim();
             String minor = rs.getString("minor").trim();
-            String org = rs.getString("organization").trim();
+            String org = rs.getString("organizations").trim();
             String grad = rs.getString("graduation").trim();
 
 
@@ -80,7 +80,7 @@ public class SimpleFormSearch extends HttpServlet {
                out.println("Graduation Date: " + grad + "<br>");
             }
          }
-         out.println("<a href=/webproject/searchLynch.html>Search Data</a> <br>");
+         out.println("<a href=/webproject/simpleFormSearch.html>Search Data</a> <br>");
          out.println("</body></html>");
          rs.close();
          preparedStatement.close();

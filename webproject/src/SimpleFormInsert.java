@@ -35,7 +35,8 @@ public class SimpleFormInsert extends HttpServlet {
       String insertSql = " INSERT INTO studentInfo (id, NAME, EMAIL, MAJOR, MINOR, ORGANIZATIONS, GRADUATION, BIO) values (default, ?, ?, ?, ?, ?, ?, ?)";
 
       try {
-         DBConnection.getDBConnection();
+    	 DBConnection.getDBConnection(getServletContext());
+    	 DBConnection.getDBConnection();
          connection = DBConnection.connection;
          PreparedStatement preparedStmt = connection.prepareStatement(insertSql);
          preparedStmt.setString(1, name);
@@ -67,7 +68,7 @@ public class SimpleFormInsert extends HttpServlet {
             "  <li><b>Email</b>: " + email + "\n" + //
             "  <li><b>Major</b>: " + major + "\n" + //
             "  <li><b>Minor</b>: " + minor + "\n" + //
-            "  <li><b>Organization</b>: " + org + "\n" + //
+            "  <li><b>Organizations</b>: " + org + "\n" + //
             "  <li><b>Graduation</b>: " + grad + "\n" + //
             "  <li><b>Bio</b>: " + bio + "\n" + //
 
