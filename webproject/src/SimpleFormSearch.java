@@ -56,7 +56,6 @@ public class SimpleFormSearch extends HttpServlet {
             preparedStatement.setString(4, search);
             preparedStatement.setString(5, search);
             preparedStatement.setString(6, search);
-
             
          }
          ResultSet rs = preparedStatement.executeQuery();

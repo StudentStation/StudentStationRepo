@@ -22,7 +22,17 @@ public class SimpleFormInsert extends HttpServlet {
    }
 
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      String name = request.getParameter("name");
+	   String keyword = request.getParameter("keyword");
+	   System.out.println(keyword);
+	   if (keyword == "delete") {
+		   delete(request);
+	   }
+	   else {
+		   insert(keyword, request, response);
+	   }
+   }
+   void insert(String keyword, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	  String name = request.getParameter("name");
       String email = request.getParameter("email");
       String major = request.getParameter("major");
       String minor = request.getParameter("minor");
@@ -63,7 +73,6 @@ public class SimpleFormInsert extends HttpServlet {
             "<body bgcolor=\"#f0f0f0\">\n" + //
             "<h2 align=\"center\">" + title + "</h2>\n" + //
             "<ul>\n" + //
-
             "  <li><b>Name</b>: " + name + "\n" + //
             "  <li><b>Email</b>: " + email + "\n" + //
             "  <li><b>Major</b>: " + major + "\n" + //
@@ -76,6 +85,20 @@ public class SimpleFormInsert extends HttpServlet {
 
       out.println("<a href=/webproject/simpleFormSearch.html>Search Data</a> <br>");
       out.println("</body></html>");
+   }
+   void delete(HttpServletRequest request) {
+	   String deleteSql = "DELETE FROM studentInfo WHERE id=" + request.getParameter("id") + ";";
+	   Connection connection = null;
+	   try {
+	    	 DBConnection.getDBConnection(getServletContext());
+	    	 DBConnection.getDBConnection();
+	         connection = DBConnection.connection;
+	         PreparedStatement preparedStmt = connection.prepareStatement(deleteSql);
+	         preparedStmt.execute();
+	         connection.close();
+	   } catch (Exception e) {
+	         e.printStackTrace();
+	   }
    }
 
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
