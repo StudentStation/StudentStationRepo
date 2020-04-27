@@ -1,0 +1,65 @@
+<html>
+<head>
+<style>
+header {
+    background-color:black;
+    color: white;
+    width: 100%;
+    height: 100px;
+    padding: 5px;
+}
+section {
+    width: 95%;
+    float:left;
+    padding:10px;
+    display: inline;
+	background-color: white;
+	opacity: 80%;
+	margin: 1%;	 	 
+}
+body {
+	background-image: url("/webproject/train background.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    overflow: hidden;
+   	width: 100%;
+   	margin: 0 auto 0 auto;
+}
+.logo {
+	width: 10%;
+	height: 100%;
+	text-align: left;
+	display: inline;
+}
+.title {
+	text-align: center;
+	display: inline;
+	position: absolute;
+	left: 40%;
+	top: -20px;
+	font-size: 60px;
+}
+</style>
+</head>
+
+<body>
+<header>
+	<h1 class = "title">Student Search</h1>
+	<img class= "logo" src="/webproject/student station logo.png" alt="Student Station">
+</header>
+
+<section>
+	<h1>Student Info Search</h1>
+	
+	<form action="SimpleFormSearch" method="POST">
+	
+		Email: <input type="text" name="keyword"> <br />
+		Password: <input type="text" name="keyword"> <br />
+		
+		<input type="submit" value="Login" />
+	</form>
+
+</section>
+
+</body>
+</html>
