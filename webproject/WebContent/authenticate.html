@@ -8,8 +8,17 @@ header {
     height: 100px;
     padding: 5px;
 }
+nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    opacity: 60%;
+    height:300px;
+    width: 10%;
+    float:left;
+    padding:5px;	      
+}
 section {
-    width: 95%;
+    width: 85%;
     float:left;
     padding:10px;
     display: inline;
@@ -42,21 +51,23 @@ body {
 </style>
 </head>
 
+
 <body>
 <header>
-	<h1 class = "title">Student Search</h1>
+	<h1 class = "title">Student Station</h1>
 	<img class= "logo" src="/webproject/student station logo.png" alt="Student Station">
 </header>
+	
 
 <section>
-	<h1>Student Info Search</h1>
+	<h1>Login</h1>
 	
-	<form action="SimpleFormSearch" method="POST">
+	<form action="Authenticate" method="POST">
 	
-		Email: <input type="text" name="keyword"> <br />
-		Password: <input type="text" name="keyword"> <br />
+		Email: <input type="text" name="email"> <br />
+		Password: <input type="password" name="password"> <br />
 		
-		<input type="submit" value="Login" />
+		<input type="submit" value="Search" />
 	</form>
 
 </section>
