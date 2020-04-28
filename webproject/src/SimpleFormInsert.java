@@ -117,7 +117,8 @@ public class SimpleFormInsert extends HttpServlet {
           		"<nav>\r\n" + 
           		"<a href=\"/webproject/home.html\">Home</a> <br>\r\n" + 
           		"<a href=\"/webproject/simpleFormSearch.html\">Search Students</a> <br>\r\n" + 
-          		"<a href=\"/webproject/simpleFormInsert.html\">Create A Page</a> <br>\r\n" + 
+          		"<a href=\"/webproject/simpleFormInsert.html\">Create A Page</a> <br>\r\n" +
+          		"<a href=\"/webproject/delete.html\">Delete Student Page</a> <br>\r\n" + 
           		"</nav>\r\n" + 
           		"\r\n" + 
           		"<section>\r\n" +

@@ -53,31 +53,24 @@ body {
 
 <body>
 <header>
-	<h1 class = "title">Create Page</h1>
+	<h1 class = "title">Delete Page</h1>
 	<img class= "logo" src="/webproject/student station logo.png" alt="Student Station">
 </header>
 
 <nav>
 <a href="/webproject/home.html">Home</a> <br>
+<a href="/webproject/simpleFormInsert.html">Create A Page</a> <br>
 <a href="/webproject/simpleFormSearch.html">Search Students</a> <br>
-<a href="/webproject/delete.html">Delete Student Page</a> <br>
 </nav>
 
 <section>
-	<h1>Please Input Your Information Below</h1>
+	<h1>Please enter the email of the account you wish to delete</h1>
 	
-	<form action="SimpleFormInsert" method="POST">
+	<form action="SimpleFormDelete" method="POST">
 	
-		Name: <input type="text" name="name"> <br />
-		Email: <input type="text" name="email"> <br />
-		Major: <input type="text" name="major"> <br />
-		Minor: <input type="text" name="minor"> <br />
-		Organizations: <input type="text" name="organization"> <br />
-		Graduation: <input type="text" name="graduation"> <br />
-		Bio: <input type="text" name="bio"> <br />
+		Search: <input type="text" name="keyword"> <br />
 		
-		
-		<input type="submit" value="Submit" />
+		<input type="submit" value="Delete" />
 	</form>
 
 </section>
