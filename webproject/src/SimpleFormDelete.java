@@ -11,20 +11,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/SimpleFormSearch")
-public class SimpleFormSearch extends HttpServlet {
+@WebServlet("/SimpleFormDelete")
+public class SimpleFormDelete extends HttpServlet {
    private static final long serialVersionUID = 1L;
 
-   public SimpleFormSearch() {
+   public SimpleFormDelete() {
       super();
    }
 
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       String keyword = request.getParameter("keyword");
-      search(keyword, response);
+      delete(keyword, response);
    }
 
-   void search(String keyword, HttpServletResponse response) throws IOException {
+   void delete(String keyword, HttpServletResponse response) throws IOException {
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();
       String docType = "<!doctype html public \"-//w3c//dtd html 4.0 " + //
@@ -83,7 +83,7 @@ public class SimpleFormSearch extends HttpServlet {
       		"\r\n" + 
       		"<body>\r\n" + 
       		"<header>\r\n" + 
-      		"	<h1 class = \"title\">Search Result</h1>\r\n" + 
+      		"	<h1 class = \"title\">Delete Student Page</h1>\r\n" + 
       		"	<img class= \"logo\" src=\"/webproject/student station logo.png\" alt=\"Student Station\">\r\n" + 
       		"</header>\r\n" + 
       		"\r\n" + 
@@ -91,13 +91,9 @@ public class SimpleFormSearch extends HttpServlet {
       		"<a href=\"/webproject/home.html\">Home</a> <br>\r\n" + 
       		"<a href=\"/webproject/simpleFormSearch.html\">Search Students</a> <br>\r\n" + 
       		"<a href=\"/webproject/simpleFormInsert.html\">Create A Page</a> <br>\r\n" + 
-      		"<a href=\"/webproject/delete.html\">Delete Student Page</a> <br>\r\n" + 
       		"</nav>\r\n" + 
       		"\r\n" + 
-      		"<section>\r\n" + "<table style='width:100%'>\r\n" +
-            "<tr><th align='left'>Name</th><th align='left'>Email</th><th align='left'>Major</th><th align='left'>" + 
-            "Minor</th><th align='left'>Organizations</th><th align='left'>Graduation date</th></tr>" +
-              "</ul>\n"
+      		"<section>\r\n" + "<p>User's page has been deleted.</p>"
       		);
 
       Connection connection = null;
@@ -111,42 +107,12 @@ public class SimpleFormSearch extends HttpServlet {
             String selectSQL = "SELECT * FROM studentInfo";
             preparedStatement = connection.prepareStatement(selectSQL);
          } else {
-            String selectSQL = "SELECT * FROM studentInfo WHERE NAME LIKE ? OR EMAIL LIKE ? OR MAJOR LIKE ? OR MINOR LIKE ? OR ORGANIZATIONS LIKE ? OR GRADUATION LIKE ?";
-            String search = keyword + "%";
-            preparedStatement = connection.prepareStatement(selectSQL);
-            preparedStatement.setString(1, search);
-            preparedStatement.setString(2, search);
-            preparedStatement.setString(3, search);
-            preparedStatement.setString(4, search);
-            preparedStatement.setString(5, search);
-            preparedStatement.setString(6, search);
-            
+            String selectSQL = "DELETE FROM studentInfo WHERE EMAIL=" +"\'" + keyword + "\'";
+            preparedStatement = connection.prepareStatement(selectSQL);            
          }
-         ResultSet rs = preparedStatement.executeQuery();
+         preparedStatement.execute();
 
-         while (rs.next()) {
-            String name = rs.getString("name").trim();
-            String email = rs.getString("email").trim();
-            String major = rs.getString("major").trim();
-            String minor = rs.getString("minor").trim();
-            String org = rs.getString("organizations").trim();
-            String grad = rs.getString("graduation").trim();
-
-
-
-            if (keyword == null || keyword.isEmpty() || name.contains(keyword) || email.contains(keyword) || major.contains(keyword) || minor.contains(keyword) || org.contains(keyword) || grad.contains(keyword)) {
-               out.println("<tr>\t<td>" + name + "</td>");
-               out.println("<td>" + email + "</td>");
-               out.println("<td>" + major + "</td>");
-               out.println("<td>" + minor + "</td>");
-               out.println("<td>" + org + "</td>");
-               out.println("<td>" + grad + "</td></tr><br>");
-            }
-         }
-         out.println("</table>");
-         out.println("<a href=/webproject/simpleFormSearch.html>Back to Search</a> <br>");
          out.println("</section></body></html>");
-         rs.close();
          preparedStatement.close();
          connection.close();
       } catch (SQLException se) {
